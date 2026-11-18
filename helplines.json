@@ -1,0 +1,72 @@
+{
+  "emergency": [
+    {
+      "name": "National Cyber Crime Reporting Portal & Helpline",
+      "number": "1930",
+      "url": "https://cybercrime.gov.in",
+      "description": "Ministry of Home Affairs 24x7 helpline for reporting cyber crimes and financial cyber fraud."
+    },
+    {
+      "name": "Women Power Line (All India)",
+      "number": "1090",
+      "url": "tel:1090",
+      "description": "Confidential assistance and grievance redressal for women facing cyber harassment, stalking or blackmail."
+    },
+    {
+      "name": "National Emergency Number",
+      "number": "112",
+      "url": "tel:112",
+      "description": "All-in-one emergency response service (Police, Medical, Fire)."
+    },
+    {
+      "name": "National Commission for Women (NCW) Cyber Cell",
+      "number": "7827170170",
+      "url": "http://ncwapps.nic.in",
+      "description": "NCW 24x7 helpline for women facing domestic violence, abuse, and cyber harassment."
+    }
+  ],
+  "sos_steps": {
+    "en": [
+      "Do NOT pay any money and do NOT negotiate. Paying leads to larger extortion demands.",
+      "Do NOT delete messages or chats — take timestamped screenshots showing phone numbers/handles.",
+      "Save and seal the evidence in the Photo Shield Evidence Vault immediately for police chain-of-custody.",
+      "Call 1930 immediately or file a report at cybercrime.gov.in under 'Cyber Crime Reporting'.",
+      "Confide in 1 trusted person (family member, mentor, or lawyer) — you are not alone."
+    ],
+    "hi": [
+      "कोई पैसे न दें और बातचीत न करें। पैसे देने से ब्लैकमेलिंग और बढ़ती है।",
+      "चैट या मैसेज डिलीट न करें — फोन नंबर और यूजरनेम के साथ स्क्रीनशॉट लें।",
+      "पुलिस जांच के लिए फोटो शील्ड एविडेंस वॉल्ट में तुरंत सबूत सुरक्षित और सील करें।",
+      "तुरंत 1930 पर कॉल करें या cybercrime.gov.in पोर्टल पर शिकायत दर्ज करें।",
+      "किसी 1 भरोसेमंद व्यक्ति (परिवार, दोस्त या वकील) को तुरंत बताएं — आप अकेले नहीं हैं।"
+    ],
+    "ta": [
+      "பணம் செலுத்த வேண்டாம், மிரட்டுபவருடன் பேச வேண்டாம்.",
+      "செய்திகளை அழிக்க வேண்டாம் — தொலைபேசி எண் மற்றும் பயனர்பெயருடன் ஸ்கிரீன்ஷாட் எடுக்கவும்.",
+      "புகைப்பட ஷீல்ட் ஆதார பெட்டகத்தில் ஆதாரங்களை உடனடியாக சேமித்து முத்திரையிடவும்.",
+      "உடனடியாக 1930 ஐ அழைக்கவும் அல்லது cybercrime.gov.in இல் புகார் அளிக்கவும்.",
+      "ஒரு நம்பகமான நபரிடம் (குடும்பம் அல்லது நண்பர்) தெரிவிக்கவும் — நீங்கள் தனியாக இல்லை."
+    ],
+    "bn": [
+      "টাকা দেবেন না এবং কোনো আলোচনা করবেন না। টাকা দিলে ব্ল্যাকমেল আরও বাড়ে।",
+      "চ্যাট বা মেসেজ মুছবেন না — ফোন নম্বর এবং ইউজারনেম সহ স্ক্রিনশট নিন।",
+      "পুলিশ প্রমাণের জন্য ফটো শিল্ড এভিডেন্স ভল্টে প্রমাণ সংরক্ষণ ও সিল করুন।",
+      "অবিলম্বে ১৯৩০ নম্বরে কল করুন বা cybercrime.gov.in-এ অভিযোগ জানান।",
+      "একজন বিশ্বস্ত ব্যক্তিকে (পরিবার বা বন্ধু) জানান — আপনি একা নন।"
+    ],
+    "mr": [
+      "पैसे देऊ नका आणि कोणतीही तडजोड करू नका. पैसे दिल्यास ब्लॅकमेलिंग वाढते.",
+      "चॅट किंवा मेसेज डिलीट करू नका — फोन नंबर आणि युझरनेमसह स्क्रीनशॉट घ्या.",
+      "पोलीस पुराव्यासाठी फोटो शील्ड एविडन्स व्हॉल्टमध्ये त्वरित पुरावा सुरक्षित आणि सील करा.",
+      "त्वरित १९३० वर कॉल करा किंवा cybercrime.gov.in वर तक्रार नोंदवा.",
+      "एका विश्वासू व्यक्तीला (कुटुंब किंवा मित्र) सांगा — तुम्ही एकटे नाही आहात."
+    ],
+    "te": [
+      "డబ్బులు చెల్లించవద్దు, బెదిరింపులకు స్పందించవద్దు.",
+      "చాట్‌లు తొలగించవద్దు — ఫోన్ నంబర్ మరియు యూజర్‌నేమ్‌తో స్క్రీన్‌షాట్ తీయండి.",
+      "పోలీసు ఆధారాల కోసం ఫోటో షీల్డ్ ఎవిడెన్స్ వాల్ట్‌లో ఆధారాలను భద్రపరచండి.",
+      "వెంటనే 1930 కి కాల్ చేయండి లేదా cybercrime.gov.in లో ఫిర్యాదు చేయండి.",
+      "ఒక నమ్మకమైన వ్యక్తికి చెప్పండి — మీరు ఒంటరిగా లేరు."
+    ]
+  }
+}

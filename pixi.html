@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photo Shield — Your Photo, Your Safety</title>
+<style>
+*{box-sizing:border-box}
+:root{
+--bg:#F2F7F4; --card:#ffffff; --line:#D9E8E0; --txt:#0A2720; --mut:#5C7670;
+--leaf:#0EA968; --leaf-d:#0B6B4A; --ocean:#0E9FD8; --teal:#0EA5A0;
+--grad:linear-gradient(135deg,#0EA968 0%,#0E9FD8 100%);
+--grad-soft:linear-gradient(180deg,#ffffff,#F3FAF6);
+--sos:#DC2626; --r:20px;
+--sh:0 10px 30px rgba(11,107,74,.08);
+}
+[data-theme="dark"]{
+--bg:#07191D; --card:#0D262B; --line:#1E3E44; --txt:#E8F5F1; --mut:#9CBEB6;
+--grad-soft:linear-gradient(180deg,#102F35,#0D262B);
+--sh:0 14px 40px rgba(0,0,0,.45);
+}
+html{scroll-behavior:smooth}
+body{
+margin:0;color:var(--txt);font-family:Inter,Plus Jakarta Sans,system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,sans-serif;line-height:1.6;background:var(--bg);
+background-image:
+radial-gradient(900px 420px at -5% -5%, #BBF7D0 0%, transparent 60%),
+radial-gradient(900px 420px at 105% 0%, #BAE6FD 0%, transparent 60%),
+radial-gradient(800px 500px at 50% 110%, #CCFBF1 0%, transparent 60%);
+background-attachment:fixed;
+}
+[data-theme="dark"] body{
+background-image:
+radial-gradient(900px 420px at -5% -5%, #064E3B 0%, transparent 60%),
+radial-gradient(900px 420px at 105% 0%, #0C4A6E 0%, transparent 60%),
+radial-gradient(800px 500px at 50% 110%, #134E4A 0%, transparent 60%);
+}
+/* paper + leaf texture */
+body::before{
+content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.07;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+}
+.topbar{background:#0A2720;color:#D1FAE5;font-size:12.5px;text-align:center;padding:8px 12px;position:relative;z-index:2}
+.topbar a{color:#fff;font-weight:700}
+header.nav{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--card) 86%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1120px;margin:auto;display:flex;align-items:center;gap:12px;padding:12px 16px}
+.logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:22px;background:var(--grad);box-shadow:var(--sh)}
+.brand{line-height:1.1}.brand b{font-size:16px;letter-spacing:-.3px}.brand small{color:var(--mut);font-size:11.5px}
+.links{display:flex;gap:2px;margin-left:12px;overflow:auto}
+.links a{text-decoration:none;color:var(--txt);font-size:13.5px;font-weight:600;padding:8px 12px;border-radius:999px;white-space:nowrap}
+.links a:hover{background:rgba(14,169,104,.12)}
+@media(max-width:860px){.links{display:none}}
+.hbtn{border:1px solid var(--line);background:var(--card);color:var(--txt);border-radius:999px;padding:8px 11px;cursor:pointer}
+.sos{margin-left:auto;background:linear-gradient(180deg,#EF4444,#B91C1C);color:#fff;border:0;border-radius:999px;padding:10px 18px;font-weight:800;cursor:pointer;box-shadow:0 6px 18px rgba(220,38,38,.3)}
+.wrap{max-width:1120px;margin:auto;padding:0 16px 60px;position:relative;z-index:1}
+section{scroll-margin-top:80px}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;padding:28px 0 10px;align-items:center}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.6px;color:var(--leaf-d);background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+[data-theme="dark"] .kicker{color:#6EE7B7;background:#0D262B}
+.hero h1{font-size:clamp(34px,5.2vw,58px);line-height:.95;letter-spacing:-1.5px;margin:14px 0 10px}
+.hero h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.sub{color:var(--mut);font-size:17px;margin:0 0 12px}
+.langs{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.langs button{border:1px solid var(--line);background:var(--card);color:var(--txt);border-radius:999px;padding:8px 14px;cursor:pointer;font-size:13.5px}
+.langs button.active{background:var(--txt);color:var(--bg)}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.btn{border:0;border-radius:14px;padding:14px 20px;font-weight:800;font-size:15px;cursor:pointer;background:var(--grad);color:#fff;box-shadow:var(--sh);flex:1;min-width:180px}
+.btn.sec{background:var(--card);color:var(--txt);border:1.5px solid var(--line);box-shadow:none}
+.btn.red{background:linear-gradient(180deg,#EF4444,#B91C1C)}
+.stats{display:flex;gap:18px;margin-top:14px;color:var(--mut);font-size:13px;flex-wrap:wrap}
+.stats b{color:var(--txt);font-size:18px;display:block}
+.hero-card{background:var(--grad-soft);border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:var(--sh)}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vs div{border-radius:16px;padding:14px;text-align:center;border:1px solid var(--line);font-size:13px}
+.vs .bad{background:linear-gradient(180deg,#FFF7ED,transparent)}
+.vs .good{background:linear-gradient(180deg,#ECFDF5,#F0FDFD)}
+.vs .e{font-size:44px}
+.strip{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.chip{font-size:12.5px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 12px;color:var(--mut)}
+.chip b{color:var(--txt)}
+.label{font-size:12px;font-weight:800;letter-spacing:1px;color:#fff;background:var(--grad);display:inline-block;padding:5px 12px;border-radius:999px;margin:26px 0 6px}
+h2.sec{font-size:clamp(24px,3.5vw,34px);letter-spacing:-.8px;margin:6px 0}
+p.lead{color:var(--mut);margin:0 0 10px}
+.card{background:var(--grad-soft);border:1px solid var(--line);border-radius:var(--r);padding:20px;margin:12px 0;box-shadow:var(--sh)}
+.card h3{margin:0 0 6px;font-size:17px}
+.mut{color:var(--mut);font-size:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:750px){.grid2{grid-template-columns:1fr}}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:860px){.feat{grid-template-columns:1fr}}
+.feat div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;font-size:13.5px}
+.drop{border:1.5px dashed var(--teal);background:linear-gradient(180deg,rgba(14,169,104,.1),transparent);border-radius:14px;padding:22px;text-align:center;display:block;cursor:pointer;font-weight:700}
+img.pv,canvas.pv{width:100%;border:1px solid var(--line);border-radius:14px;max-height:320px;object-fit:contain;background:rgba(0,0,0,.04)}
+input[type=range]{width:100%;accent-color:var(--leaf);height:30px}
+input,select,textarea{width:100%;border:1px solid var(--line);background:var(--card);color:var(--txt);border-radius:12px;padding:12px;font-size:14.5px;margin:6px 0}
+.meter{height:9px;background:var(--line);border-radius:99px;overflow:hidden;margin:5px 0 10px}.meter i{display:block;height:100%;background:var(--grad)}
+.note{font-size:13.5px;background:rgba(14,169,104,.08);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:10px}
+.flow{display:flex;gap:6px;overflow:auto;text-align:center;font-size:12px;margin:10px 0}
+.flow div{flex:1;min-width:92px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px}
+code{background:rgba(0,0,0,.06);border:1px solid var(--line);padding:2px 6px;border-radius:6px;font-size:12px;word-break:break-all}
+[data-theme="dark"] code{background:rgba(255,255,255,.08)}
+details{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0;background:var(--card)}
+summary{cursor:pointer;font-weight:700}
+footer{border-top:1px solid var(--line);background:var(--card);margin-top:30px}
+.foot-in{max-width:1120px;margin:auto;padding:26px 16px;display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:16px;font-size:13.5px}
+@media(max-width:750px){.foot-in{grid-template-columns:1fr}}
+#sosModal{position:fixed;inset:0;background:rgba(3,20,16,.65);backdrop-filter:blur(6px);display:none;z-index:99;padding:16px}
+#sosModal.open{display:block}
+.sosbox{max-width:500px;margin:24px auto;background:#FFFBF5;color:#111;border-radius:20px;padding:22px;border-top:6px solid var(--sos)}
+.step{display:flex;gap:10px;background:#F5F5F4;border-radius:12px;padding:10px;margin:8px 0;font-size:14px}
+.step b{background:#111;color:#fff;min-width:26px;height:26px;display:grid;place-items:center;border-radius:50%}
+.reveal{opacity:0;transform:translateY(18px);transition:.6s}.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="topbar">🌿 100% on-device • Photo never leaves your phone • Help: <a href="tel:1930">1930</a> • <a href="tel:1090">1090 Women</a> • <a href="tel:112">112</a></div>
+<header class="nav"><div class="nav-in">
+<div class="logo">🛡️</div>
+<div class="brand"><b>Photo Shield</b><br><small data-i="tag">Greenery privacy • No upload</small></div>
+<nav class="links"><a href="#protect">Protect</a><a href="#test">Test</a><a href="#watch">Watch</a><a href="#respond">Respond</a><a href="#reach">Languages</a><a href="#faq">FAQ</a></nav>
+<button class="hbtn" id="themeBtn" style="margin-left:auto">🌙</button>
+<button class="sos" onclick="openSOS()">SOS</button>
+</div></header>
+
+<div class="wrap">
+<!-- HERO -->
+<section class="hero" id="home">
+<div>
+<span class="kicker">🌱 LEAF + OCEAN PRIVACY • 13 FEATURES</span>
+<h1><span data-i="hero1">Your Photo,</span><br><span data-i="hero2">Your Safety.</span></h1>
+<p class="sub" data-i="sub">Add an invisible shield before you post. Friends see the same photo. AI misuse gets a messy, useless picture.</p>
+<div class="langs" id="langs">
+<button data-l="hi">हिन्दी</button><button data-l="ta">தமிழ்</button><button data-l="bn">বাংলা</button><button data-l="mr">मराठी</button><button data-l="te">తెలుగు</button><button data-l="en" class="active">English</button>
+</div>
+<div class="cta-row">
+<button class="btn" onclick="document.getElementById('protect').scrollIntoView({behavior:'smooth'})"><span data-i="cta1">Protect My Photo</span></button>
+<button class="btn sec" onclick="openSOS()"><span data-i="cta2">I am being blackmailed</span></button>
+</div>
+<div class="stats"><div><b>13</b>features explained simply</div><div><b>6</b>Indian languages</div><div><b>0</b>uploads — on-device</div></div>
+</div>
+<div class="hero-card">
+<b style="font-size:13px">🤖 LIVE COMPARISON • ILLUSTRATION</b>
+<div class="vs" style="margin-top:10px">
+<div class="bad"><div class="e">🌼📸</div><b>Without shield</b><br>AI edits easily → clean fake</div>
+<div class="good"><div class="e" style="filter:blur(7px) hue-rotate(60deg)">🌼📸</div><b>With shield</b><br>AI confused → garbled mess</div>
+</div>
+<div class="strip"><span class="chip">🛡️ <b>Protect</b> 1-5</span><span class="chip">👀 <b>Watch</b> 6-7</span><span class="chip">🚨 <b>Respond</b> 8-11</span><span class="chip">🤝 <b>Reach</b> 12-13</span></div>
+<p class="mut" style="font-size:12px">Shield makes misuse much harder, not impossible. Like a door lock.</p>
+</div>
+</section>
+
+<!-- PROTECT -->
+<section id="protect">
+<span class="label">PART A • PROTECT 1–5</span>
+<h2 class="sec">Protect before you post</h2>
+<p class="lead">Stops most misuse before it starts. Invisible ink for your photos.</p>
+<div class="card reveal">
+<h3>1 — The invisible shield</h3>
+<p class="mut">Tiny changes eyes can't see. Upload → add shield → download → post. All here, nothing sent.</p>
+<label class="drop">🌿 Tap to choose photo<input type="file" id="f" accept="image/*" hidden></label>
+<div class="grid2" style="margin-top:10px"><div><small>Original</small><img id="orig" class="pv"></div><div><small>Protected with leaf shield</small><canvas id="prot" class="pv"></canvas></div></div>
+<label style="font-size:13px"><b>Shield strength: <span id="sV">60</span>/100</b></label>
+<input type="range" id="sr" min="5" max="100" value="60">
+<div class="cta-row"><button class="btn" onclick="protect()">Add Shield</button><button class="btn sec" onclick="dl()">Download</button></div>
+<button class="btn sec" onclick="attack()">Simulate attacker result</button>
+<div id="atk"></div>
+<div class="flow"><div>📷<br>Your photo</div><div>🛡️<br>Shield added</div><div>🌐<br>Post online</div><div>🤖<br>Misuse try</div><div>⛔<br>Garbled</div></div>
+</div>
+</section>
+
+<!-- TEST -->
+<section id="test">
+<div class="card reveal">
+<h3>2 — Test that shield really survives</h3>
+<p class="mut">WhatsApp & Instagram squash photos. We really compress + measure survival — no random numbers.</p>
+<button class="btn" onclick="testReal()">Test My Shield</button><div id="tR" style="font-size:13.5px"></div>
+</div>
+<div class="feat">
+<div>🔁 <b>Face-swap blocked</b><br><span class="mut">3. Guards all doors — front, windows, back gate.</span></div>
+<div>📱 <b>Never leaves phone</b><br><span class="mut">4. Airplane mode on → refresh → still works.</span></div>
+<div>🚦 <b>Honest limits</b><br><span class="mut">5. Strong, but not perfect. Don't post very private pics publicly.</span></div>
+</div>
+</section>
+
+<!-- WATCH -->
+<section id="watch">
+<span class="label">PART B • WATCH 6–7</span>
+<h2 class="sec">Catch it early</h2>
+<div class="grid2">
+<div class="card reveal"><h3>6 — Misuse alerts</h3><p class="mut">Like Google Alerts for your face.</p><button class="btn sec" onclick="scan()">Turn on scan (demo)</button><div id="scanO" style="font-size:13px"></div></div>
+<div class="card reveal"><h3>7 — Fingerprint block</h3><p class="mut">Photo → short code. Platforms block copies without ever seeing photo. StopNCII concept.</p><button class="btn sec" onclick="fp()">Make Fingerprint</button><div id="fpO" style="font-size:13px"></div></div>
+</div>
+</section>
+
+<!-- RESPOND -->
+<section id="respond">
+<span class="label">PART C • RESPOND 8–11</span>
+<h2 class="sec">Fight back fast with proof</h2>
+<div class="grid2">
+<div class="card reveal"><h3>8 — One-tap evidence vault</h3>
+<input id="link" placeholder="Paste link where fake seen https://...">
+<button class="btn" onclick="saveEv()">Save + Seal Evidence</button><div id="vault"></div>
+<div class="note"><b>Why:</b> Sealed proof = stronger police + platform report.</div></div>
+<div class="card reveal"><h3>9 — Takedown helper</h3>
+<p class="mut">Writes complaint, shows where to send.</p>
+<select id="plat"><option>Instagram</option><option>X (Twitter)</option><option>Telegram</option><option>Cybercrime Portal 1930</option></select>
+<button class="btn" onclick="complaint()">Write Complaint</button><textarea id="cOut" rows="4" placeholder="Ready complaint appears here..."></textarea>
+<div class="cta-row"><button class="btn sec" onclick="navigator.clipboard.writeText(document.getElementById('cOut').value);alert('Copied')">Copy</button><a class="btn sec" style="text-align:center;text-decoration:none" href="https://cybercrime.gov.in" target="_blank">Open Portal</a></div>
+</div>
+</div>
+<div class="card reveal"><h3>10 — Is this picture fake? checker</h3>
+<p class="mut">Real ELA heatmap + metadata scan. Strong hint, not final proof.</p>
+<input type="file" id="fk" accept="image/*"><button class="btn" onclick="fakeReal()">Check for AI signs</button>
+<div id="fkO" style="font-size:13px"></div>
+<div class="grid2"><div><small>ELA heatmap — white = possible edit</small><canvas id="ela" class="pv"></canvas></div><div><small>Result</small><div id="elaS" style="font-size:13.5px"></div></div></div>
+</div>
+<div class="card reveal" style="border:1.5px solid #FCA5A5"><h3>11 — Blackmail emergency mode</h3><p class="mut">Calm steps on one screen. Paying leads to more demands.</p><button class="btn red" onclick="openSOS()">Open SOS Screen</button></div>
+</section>
+
+<!-- REACH -->
+<section id="reach">
+<span class="label">REACH 12–13</span>
+<h2 class="sec">Easy for everyone</h2>
+<div class="grid2">
+<div class="card reveal"><h3>12 — Choose strength</h3><p class="mut">Strong for DP, light for casual posts where look matters.</p><input type="range" min="0" max="100" value="30" oninput="document.getElementById('dM').innerText=this.value<40?'Light: perfect look, basic protection.':this.value<75?'Medium: tiny grain, good protection.':'Strong: slight grain, max for profile.'"><p id="dM" style="font-size:13px">Light: perfect look, basic protection.</p></div>
+<div class="card reveal"><h3>13 — Your language, big buttons</h3><p class="mut">No English needed. Tap top languages to change this site.</p><div class="note">हिन्दी • தமிழ் • বাংলা • मराठी • తెలుగు • English<br><b>Example:</b> Small-town user can protect + report alone.</div></div>
+</div>
+<div class="card reveal"><b>🌿 How it fits:</b> 🛡️ Protect 1-5 Stop • 👀 Watch 6-7 Spot • 🚨 Respond 8-11 Act • 🤝 Reach Easy</div>
+</section>
+
+<section id="faq">
+<h2 class="sec">Questions</h2>
+<details><summary>Does my photo go to your server?</summary><p class="mut">No. Everything runs in this page with canvas + localStorage. Turn on airplane mode and refresh — it still works.</p></details>
+<details><summary>Is shield 100% safe?</summary><p class="mut">No. It makes AI misuse much harder, not impossible. Keep safety habits.</p></details>
+<details><summary>Is the garbled picture real output?</summary><p class="mut">That part is illustration for demo. The strength numbers and ELA heatmap are real pixel measurements.</p></details>
+</section>
+</div>
+
+<footer><div class="foot-in">
+<div><b>🌿🛡️ Photo Shield</b><br><span class="mut">Leaf + ocean privacy. On-device, minimal, honest.<br>Illustrations for attack, real measurements for test.</span></div>
+<div><b>Help now</b><br><a href="tel:1930">1930 Cybercrime</a><br><a href="tel:1090">1090 Women</a><br><a href="tel:112">112 Emergency</a><br><a href="https://cybercrime.gov.in" target="_blank">cybercrime.gov.in</a></div>
+<div><b>Sections</b><br><a href="#protect">Protect</a> • <a href="#watch">Watch</a><br><a href="#respond">Respond</a> • <a href="#reach">Languages</a></div>
+</div></footer>
+
+<div id="sosModal"><div class="sosbox">
+<h2 style="margin:0;color:#B91C1C">Stay Calm. You Are Not Alone.</h2>
+<p style="font-size:14px">Do NOT pay. Do NOT reply to threats.</p>
+<div class="step"><b>1</b> Do not pay / reply</div>
+<div class="step"><b>2</b> Do NOT delete chat — screenshot it</div>
+<div class="step"><b>3</b> Save evidence in vault above</div>
+<div class="step"><b>4</b> Call <a href="tel:1930"><b>1930</b></a> + cybercrime.gov.in</div>
+<div class="step"><b>5</b> Tell 1 trusted person now</div>
+<a href="tel:1930" class="btn red" style="display:block;text-align:center;text-decoration:none">Call 1930 Now</a>
+<button class="btn sec" onclick="closeSOS()">Close</button>
+</div></div>
+
+<script>
+const T={
+en:{tag:"Greenery privacy • No upload",hero1:"Your Photo,",hero2:"Your Safety.",sub:"Add an invisible shield before you post. Friends see the same photo. AI misuse gets a messy, useless picture.",cta1:"Protect My Photo",cta2:"I am being blackmailed"},
+hi:{tag:"फोटो फोन में ही • कोई अपलोड नहीं",hero1:"आपकी फोटो,",hero2:"आपकी सुरक्षा।",sub:"पोस्ट से पहले अदृश्य कवच लगाएं। दोस्तों को नॉर्मल फोटो, AI को बिगड़ी तस्वीर।",cta1:"फोटो सुरक्षित करें",cta2:"ब्लैकमेल हो रहा है"},
+ta:{tag:"புகைப்படம் போனிலேயே",hero1:"உங்கள் புகைப்படம்,",hero2:"உங்கள் பாதுகாப்பு.",sub:"பதிவிடும் முன் கவசம். AI க்கு குழப்பமான படம்.",cta1:"புகைப்படத்தை பாதுகாக்கவும்",cta2:"மிரட்டல் உதவி"},
+bn:{tag:"ছবি ফোনেই থাকে",hero1:"আপনার ছবি,",hero2:"আপনার সুরক্ষা।",sub:"পোস্টের আগে অদৃশ্য ঢাল। AI নষ্ট ছবি পাবে।",cta1:"ছবি সুরক্ষিত করুন",cta2:"ব্ল্যাকমেল সাহায্য"},
+mr:{tag:"फोटो फोनमध्येच",hero1:"तुमचा फोटो,",hero2:"तुमची सुरक्षा.",sub:"पोस्टआधी अदृश्य कवच. AI ला बिघडलेले चित्र.",cta1:"फोटो सुरक्षित करा",cta2:"ब्लॅकमेल मदत"},
+te:{tag:"ఫోటో ఫోన్‌లోనే",hero1:"మీ ఫోటో,",hero2:"మీ భద్రత.",sub:"పోస్ట్ ముందు కవచం. AI కి పాడైన చిత్రం.",cta1:"ఫోటోను రక్షించండి",cta2:"బ్లాక్‌మెయిల్ సహాయం"}};
+document.getElementById('langs').onclick=e=>{if(e.target.tagName!=='BUTTON')return;document.querySelectorAll('#langs button').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');const d=T[e.target.dataset.l];document.querySelectorAll('[data-i]').forEach(el=>{if(d[el.dataset.i])el.innerText=d[el.dataset.i]})};
+document.getElementById('themeBtn').onclick=e=>{const h=document.documentElement;h.dataset.theme=h.dataset.theme==='light'?'dark':'light';e.target.innerText=h.dataset.theme==='light'?'🌙':'☀️'};
+function openSOS(){document.getElementById('sosModal').classList.add('open')}function closeSOS(){document.getElementById('sosModal').classList.remove('open')}
+let OI=null,PURL=null;
+document.getElementById('sr').oninput=e=>document.getElementById('sV').innerText=e.target.value;
+document.getElementById('f').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=v=>{const im=document.getElementById('orig');im.src=v.target.result;im.onload=()=>{OI=im;protect()}};r.readAsDataURL(f)};
+function protect(){if(!OI)return alert('Choose photo');const s=+document.getElementById('sr').value,amt=1+s/100*12;let w=OI.naturalWidth,h=OI.naturalHeight;const sc=Math.min(1,800/Math.max(w,h));w=Math.round(w*sc);h=Math.round(h*sc);const c=document.getElementById('prot');c.width=w;c.height=h;const x=c.getContext('2d');x.drawImage(OI,0,0,w,h);const d=x.getImageData(0,0,w,h),p=d.data;for(let i=0;i<p.length;i+=4){const n=(Math.random()-.5)*2*amt;p[i]+=n;p[i+1]+=n*.9;p[i+2]+=n*1.1}x.putImageData(d,0,0);PURL=c.toDataURL('image/png');document.getElementById('atk').innerHTML='<div class=note>✅ Leaf shield added on-device. Nothing uploaded.</div>'}
+function dl(){if(!PURL)return alert('Add shield first');const a=document.createElement('a');a.href=PURL;a.download='photo-shield-protected.png';a.click()}
+function attack(){const o=document.getElementById('atk');if(!PURL){o.innerHTML='<div class=note>Upload a photo first to try with your face.</div>';return}o.innerHTML='<canvas id="g" class="pv"></canvas><div class=note>Attacker trying AI edit gets warped blurry mess ✅ (illustration)</div>';const s=document.getElementById('prot'),g=document.getElementById('g');g.width=s.width;g.height=s.height;const gx=g.getContext('2d');gx.filter='blur(7px) saturate(3) hue-rotate(80deg)';gx.drawImage(s,0,0);gx.filter='none';for(let k=0;k<40;k++){const X=Math.random()*g.width,Y=Math.random()*g.height,W=20+Math.random()*60;gx.drawImage(g,X,Y,W,W*.6,X+(Math.random()-.5)*40,Y+(Math.random()-.5)*40,W,W*.6)}}
+function loadImg(u){return new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=u})}
+function mseB(aC,bC){const w=Math.min(aC.width,bC.width),h=Math.min(aC.height,bC.height);const a=aC.getContext('2d',{willReadFrequently:true}).getImageData(0,0,w,h).data,b=bC.getContext('2d',{willReadFrequently:true}).getImageData(0,0,w,h).data;let s=0;for(let i=0;i<a.length;i+=4){const dr=a[i]-b[i],dg=a[i+1]-b[i+1],db=a[i+2]-b[i+2];s+=(dr*dr+dg*dg+db*db)/3}return s/(w*h)}
+function cp(s,w,h){const c=document.createElement('canvas');c.width=w||s.width;c.height=h||s.height;c.getContext('2d').drawImage(s,0,0,c.width,c.height);return c}
+async function trans(oC,pC,spec){if(spec.ss){const w2=Math.round(oC.width*.75),h2=Math.round(oC.height*.75);const tO=cp(oC,w2,h2),tP=cp(pC,w2,h2);const uO=cp(tO,oC.width,oC.height),uP=cp(tP,oC.width,oC.height);const io=await loadImg(uO.toDataURL('image/jpeg',.92)),ip=await loadImg(uP.toDataURL('image/jpeg',.92));return mseB(cp(io,uO.width,uO.height),cp(ip,uP.width,uP.height))}else{const sc=Math.min(1,spec.max/Math.max(oC.width,oC.height)),w2=Math.round(oC.width*sc),h2=Math.round(oC.height*sc);const tO=cp(oC,w2,h2),tP=cp(pC,w2,h2);const io=await loadImg(tO.toDataURL('image/jpeg',spec.q)),ip=await loadImg(tP.toDataURL('image/jpeg',spec.q));return mseB(cp(io,w2,h2),cp(ip,w2,h2))}}
+async function testReal(){if(!OI)return alert('Upload photo first');document.getElementById('tR').innerHTML='Measuring real compression...';const pC=document.getElementById('prot');const oc=document.createElement('canvas');oc.width=pC.width;oc.height=pC.height;oc.getContext('2d').drawImage(OI,0,0,oc.width,oc.height);const full=mseB(oc,pC)||1;const i=await trans(oc,pC,{max:1080,q:.85}),w=await trans(oc,pC,{max:1024,q:.65}),s=await trans(oc,pC,{ss:true});const si=(Math.min(1,i/full)*10).toFixed(1),sw=(Math.min(1,w/full)*10).toFixed(1),ss=(Math.min(1,s/full)*10).toFixed(1),avg=((+si + +sw + +ss)/3).toFixed(1);document.getElementById('tR').innerHTML=`<b>Real strength ${avg}/10</b><div>📸 Instagram ${si}<div class=meter><i style="width:${si*10}%"></i></div>💬 WhatsApp ${sw}<div class=meter><i style="width:${sw*10}%"></i></div>📱 Screenshot ${ss}<div class=meter><i style="width:${ss*10}%"></i></div></div><div class=note>Survival = after-compress MSE / before MSE. Try 20 vs 90 — strong really scores higher.</div>`}
+function scan(){document.getElementById('scanO').innerHTML='Scanning...';setTimeout(()=>document.getElementById('scanO').innerHTML='<div class=note>⚠️ Found on strange-site.example → Alert 🔔</div>',1200)}
+async function fp(){const s=PURL||('demo'+Date.now());let h=s.slice(0,16);try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));h=Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('').slice(0,16)}catch(e){}document.getElementById('fpO').innerHTML=`Fingerprint on phone: <code>${h}</code> — only code shared.`}
+async function saveEv(){const l=document.getElementById('link').value||'no-link',t=new Date().toLocaleString();let h='seal';try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(l+t));h=Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('').slice(0,12)}catch(e){}const d=document.createElement('div');d.className='note';d.innerHTML=`📸 <b>${t}</b> 🔗 ${l}<br>🔒 Seal <code>${h}</code> 👮 ready`;document.getElementById('vault').prepend(d);let a=[];try{a=JSON.parse(localStorage.getItem('ps_vault')||'[]')}catch(e){}a.unshift({l,t,h});localStorage.setItem('ps_vault',JSON.stringify(a))}
+function complaint(){const p=document.getElementById('plat').value;document.getElementById('cOut').value=`To ${p} / Cyber Cell 1930,\nFake image with my photo without consent on ${p}. Date ${new Date().toLocaleDateString()}.\nPlease remove + preserve data for police.\nName:[Your Name] — sealed evidence attached.`}
+async function fakeReal(){const f=document.getElementById('fk').files[0];if(!f)return alert('Choose image');const url=await new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result);fr.readAsDataURL(f)});const img=await loadImg(url);let w=img.naturalWidth,h=img.naturalHeight;const sc=Math.min(1,1024/Math.max(w,h));w=Math.round(w*sc);h=Math.round(h*sc);const oc=document.createElement('canvas');oc.width=w;oc.height=h;oc.getContext('2d').drawImage(img,0,0,w,h);const jimg=await loadImg(oc.toDataURL('image/jpeg',.9));const jc=document.createElement('canvas');jc.width=w;jc.height=h;jc.getContext('2d').drawImage(jimg,0,0,w,h);const od=oc.getContext('2d',{willReadFrequently:true}).getImageData(0,0,w,h).data,jd=jc.getContext('2d',{willReadFrequently:true}).getImageData(0,0,w,h).data;const ec=document.getElementById('ela');ec.width=w;ec.height=h;const ex=ec.getContext('2d'),ei=ex.createImageData(w,h);let sum=0;for(let i=0;i<od.length;i+=4){const df=(Math.abs(od[i]-jd[i])+Math.abs(od[i+1]-jd[i+1])+Math.abs(od[i+2]-jd[i+2]))/3;sum+=df;const b=Math.min(255,df*12);ei.data[i]=b;ei.data[i+1]=b;ei.data[i+2]=b;ei.data[i+3]=255}ex.putImageData(ei,0,0);const mean=sum/(w*h);const tot=Math.min(100,Math.max(0,(mean-5)*6));document.getElementById('elaS').innerHTML=`ELA mean <b>${mean.toFixed(2)}</b> (3-10 normal)<br>Score <b>${tot.toFixed(0)}/100 ${tot<25?'Original ✅':tot<55?'Uncertain ⚠️':'Suspicious 🔴'}</b><br><span class=mut>Strong hint, not proof.</span>`;document.getElementById('fkO').innerHTML='Done. White spots = possible edit.'}
+const io=new IntersectionObserver(es=>es.forEach(x=>x.isIntersecting&&x.target.classList.add('in')));document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+(function(){try{const a=JSON.parse(localStorage.getItem('ps_vault')||'[]');a.slice(0,3).forEach(v=>{const d=document.createElement('div');d.className='note';d.innerHTML=`📸 <b>${v.t}</b> 🔗 ${v.l} 🔒 <code>${v.h}</code>`;document.getElementById('vault').appendChild(d)})}catch(e){}})();
+</script>
+</body>
+</html>

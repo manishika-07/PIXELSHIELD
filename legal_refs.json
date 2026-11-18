@@ -1,0 +1,90 @@
+{
+  "statutes": {
+    "it_act_2000": {
+      "title": "Information Technology Act, 2000 (Amended 2008)",
+      "sections": {
+        "66E": {
+          "code": "Section 66E",
+          "title": "Punishment for violation of privacy",
+          "description": "Whoever intentionally or knowingly captures, publishes or transmits the image of a private area of any person without consent, violates privacy with imprisonment up to 3 years or fine up to 2 lakh rupees."
+        },
+        "66D": {
+          "code": "Section 66D",
+          "title": "Punishment for cheating by personation by using computer resource",
+          "description": "Whoever by means of any communication device or computer resource cheats by personating shall be punished with imprisonment up to 3 years and fine."
+        },
+        "67": {
+          "code": "Section 67",
+          "title": "Punishment for publishing or transmitting obscene material in electronic form",
+          "description": "Punishment for publishing or transmitting obscene material in electronic form on first conviction with imprisonment up to 3 years and fine up to 5 lakh rupees."
+        },
+        "67A": {
+          "code": "Section 67A",
+          "title": "Punishment for publishing or transmitting of material containing sexually explicit act in electronic form",
+          "description": "Punishment for publishing or transmitting sexually explicit material in electronic form with imprisonment up to 5 years and fine up to 10 lakh rupees on first conviction."
+        }
+      }
+    },
+    "it_rules_2021": {
+      "title": "Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021",
+      "rules": {
+        "3_2_b": {
+          "code": "Rule 3(2)(b)",
+          "title": "24-Hour Removal of Non-Consensual Morphed/Intimate Imagery",
+          "description": "Intermediary must within 24 hours from receipt of complaint remove or disable access to content exposing the private area of an individual, showing full or partial nudity, or depicting an individual in any sexual act or conduct, or any morphed content or artificial non-consensual depiction."
+        }
+      }
+    },
+    "bns_2023": {
+      "title": "Bharatiya Nyaya Sanhita, 2023",
+      "sections": {
+        "77": {
+          "code": "Section 77",
+          "title": "Voyeurism",
+          "description": "Any person who captures or disseminates images of a woman engaging in a private act in circumstances where she would usually have the expectation of privacy."
+        },
+        "308": {
+          "code": "Section 308",
+          "title": "Extortion",
+          "description": "Intentionally putting any person in fear of injury and dishonestly inducing delivery of property or valuable security (blackmail)."
+        },
+        "351": {
+          "code": "Section 351",
+          "title": "Criminal Intimidation",
+          "description": "Threatening injury to person, reputation or property to cause alarm or force any act."
+        }
+      }
+    }
+  },
+  "platforms": {
+    "Instagram": {
+      "name": "Instagram / Meta",
+      "reporting_url": "https://help.instagram.com/contact/383679321740945",
+      "grievance_email": "grievance-officer-india@support.facebook.com",
+      "sla_hours": 24,
+      "rule_citation": "Rule 3(2)(b) IT Rules 2021 & Section 66E/67/67A IT Act 2000"
+    },
+    "X (Twitter)": {
+      "name": "X (formerly Twitter)",
+      "reporting_url": "https://help.twitter.com/forms/safety-and-sensitive-content",
+      "grievance_email": "grievance-officer-in@x.com",
+      "sla_hours": 24,
+      "rule_citation": "Rule 3(2)(b) IT Rules 2021 & Section 66E IT Act 2000"
+    },
+    "Telegram": {
+      "name": "Telegram Messenger",
+      "reporting_url": "https://telegram.org/support",
+      "grievance_email": "abuse@telegram.org",
+      "sla_hours": 24,
+      "rule_citation": "Rule 3(2)(b) IT Rules 2021 & Section 67A IT Act 2000"
+    },
+    "Cybercrime Portal 1930": {
+      "name": "National Cyber Crime Reporting Portal (MHA)",
+      "reporting_url": "https://cybercrime.gov.in",
+      "helpline": "1930",
+      "sla_hours": 0,
+      "rule_citation": "Sections 66E, 66D, 67, 67A IT Act 2000 and Sections 77, 308, 351 BNS 2023"
+    }
+  },
+  "disclaimer": "Verify with a legal professional before relying on this complaint draft. This tool provides statutory references for incident reporting and platform escalation under Indian Law."
+}

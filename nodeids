@@ -1,0 +1,8 @@
+[
+  "backend/tests/test_validation.py::test_evidence_seal_integrity",
+  "backend/tests/test_validation.py::test_ssrf_blocks_private_and_loopback",
+  "backend/tests/test_validation.py::test_validate_image_bytes_reject_plain_text",
+  "backend/tests/test_validation.py::test_validate_image_bytes_too_large",
+  "backend/tests/test_validation.py::test_validate_image_bytes_valid_jpeg",
+  "backend/tests/test_validation.py::test_validate_image_bytes_valid_png"
+]
